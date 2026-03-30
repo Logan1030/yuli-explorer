@@ -98,11 +98,9 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildSubjectCards(BuildContext context) {
     return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        children: [
             // 英语城堡
             _SubjectCard(
               title: '英语城堡',
@@ -112,7 +110,7 @@ class HomeScreen extends StatelessWidget {
               icon: Icons.auto_stories,
               onTap: () => context.push('/world/english'),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 16),
             // 数学迷宫
             _SubjectCard(
               title: '数学迷宫',
@@ -122,7 +120,7 @@ class HomeScreen extends StatelessWidget {
               icon: Icons.calculate,
               onTap: () => context.push('/world/math'),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 16),
             // 语文花园
             _SubjectCard(
               title: '语文花园',
@@ -134,8 +132,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 
   Widget _buildBottomNav(BuildContext context) {
