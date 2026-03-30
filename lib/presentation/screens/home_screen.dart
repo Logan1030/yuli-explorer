@@ -22,9 +22,11 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               _buildHeader(context),
-              const SizedBox(height: 20),
-              _buildSubjectCards(context),
-              const Spacer(),
+              Expanded(
+                child: Center(
+                  child: _buildSubjectCards(context),
+                ),
+              ),
               _buildBottomNav(context),
             ],
           ),
@@ -97,9 +99,10 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildSubjectCards(BuildContext context) {
-    return Expanded(
-      child: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
             // 英语城堡
             _SubjectCard(
@@ -131,8 +134,8 @@ class HomeScreen extends StatelessWidget {
               onTap: () => context.push('/world/chinese'),
             ),
           ],
-        ),
-      );
+      ),
+    );
   }
 
   Widget _buildBottomNav(BuildContext context) {
@@ -187,7 +190,7 @@ class _SubjectCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 100,
+        height: 90,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
