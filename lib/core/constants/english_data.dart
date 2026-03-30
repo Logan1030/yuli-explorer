@@ -93,4 +93,38 @@ const englishChapters = [
       EnglishWord(english: 'mountain', chinese: '山'),
     ],
   ),
+  EnglishChapter(
+    chapter: 6,
+    title: '第六章：房间名称',
+    words: [
+      EnglishWord(english: 'living room', chinese: '客厅'),
+      EnglishWord(english: 'bedroom', chinese: '卧室'),
+      EnglishWord(english: 'bathroom', chinese: '浴室'),
+      EnglishWord(english: 'kitchen', chinese: '厨房'),
+      EnglishWord(english: 'dining room', chinese: '餐厅'),
+      EnglishWord(english: 'garage', chinese: '车库'),
+    ],
+  ),
+  EnglishChapter(
+    chapter: 7,
+    title: '第七章：家具用品',
+    words: [
+      EnglishWord(english: 'chair', chinese: '椅子'),
+      EnglishWord(english: 'desk', chinese: '书桌'),
+      EnglishWord(english: 'lamp', chinese: '台灯'),
+      EnglishWord(english: 'bed', chinese: '床'),
+      EnglishWord(english: 'mat', chinese: '垫子'),
+      EnglishWord(english: 'sofa', chinese: '沙发'),
+    ],
+  ),
+  EnglishChapter(
+    chapter: 8,
+    title: '第八章：场所地点',
+    words: [
+      EnglishWord(english: 'train station', chinese: '火车站'),
+      EnglishWord(english: 'airport', chinese: '机场'),
+      EnglishWord(english: 'hotel', chinese: '酒店'),
+      EnglishWord(english: 'amusement park', chinese: '游乐园'),
+    ],
+  ),
 ];

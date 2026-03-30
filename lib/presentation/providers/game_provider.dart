@@ -18,20 +18,25 @@ class GameProvider extends ChangeNotifier {
   int _chineseStars = 0;
   int get chineseStars => _chineseStars;
 
+  int _pinyinStars = 0;
+  int get pinyinStars => _pinyinStars;
+
   // 各科目解锁状态
   Map<String, List<bool>> _unlockedLevels = {
-    'english': List.generate(5, (i) => i == 0),  // 第一章解锁
+    'english': List.generate(8, (i) => i == 0),  // 第一章解锁
     'math': List.generate(10, (i) => i == 0),    // 第一关解锁
     'chinese': List.generate(5, (i) => i == 0),  // 第一章解锁
+    'pinyin': List.generate(4, (i) => i == 0),   // 第一章解锁
   };
 
   Map<String, List<bool>> get unlockedLevels => _unlockedLevels;
 
   // 各科目每关获得的星星
   Map<String, List<int>> _levelStars = {
-    'english': List.filled(5, 0),
+    'english': List.filled(8, 0),
     'math': List.filled(10, 0),
     'chinese': List.filled(5, 0),
+    'pinyin': List.filled(4, 0),
   };
 
   Map<String, List<int>> get levelStars => _levelStars;
@@ -51,6 +56,7 @@ class GameProvider extends ChangeNotifier {
     _englishStars = _box!.get('englishStars', defaultValue: 0);
     _mathStars = _box!.get('mathStars', defaultValue: 0);
     _chineseStars = _box!.get('chineseStars', defaultValue: 0);
+    _pinyinStars = _box!.get('pinyinStars', defaultValue: 0);
 
     // 加载解锁状态
     final englishUnlocked = _box!.get('englishUnlocked');
@@ -66,6 +72,11 @@ class GameProvider extends ChangeNotifier {
     final chineseUnlocked = _box!.get('chineseUnlocked');
     if (chineseUnlocked != null) {
       _unlockedLevels['chinese'] = List<bool>.from(chineseUnlocked);
+    }
+
+    final pinyinUnlocked = _box!.get('pinyinUnlocked');
+    if (pinyinUnlocked != null) {
+      _unlockedLevels['pinyin'] = List<bool>.from(pinyinUnlocked);
     }
 
     // 加载关卡星星
@@ -84,6 +95,11 @@ class GameProvider extends ChangeNotifier {
       _levelStars['chinese'] = List<int>.from(chineseLevelStars);
     }
 
+    final pinyinLevelStars = _box!.get('pinyinLevelStars');
+    if (pinyinLevelStars != null) {
+      _levelStars['pinyin'] = List<int>.from(pinyinLevelStars);
+    }
+
     notifyListeners();
   }
 
@@ -94,12 +110,15 @@ class GameProvider extends ChangeNotifier {
     await _box!.put('englishStars', _englishStars);
     await _box!.put('mathStars', _mathStars);
     await _box!.put('chineseStars', _chineseStars);
+    await _box!.put('pinyinStars', _pinyinStars);
     await _box!.put('englishUnlocked', _unlockedLevels['english']);
     await _box!.put('mathUnlocked', _unlockedLevels['math']);
     await _box!.put('chineseUnlocked', _unlockedLevels['chinese']);
+    await _box!.put('pinyinUnlocked', _unlockedLevels['pinyin']);
     await _box!.put('englishLevelStars', _levelStars['english']);
     await _box!.put('mathLevelStars', _levelStars['math']);
     await _box!.put('chineseLevelStars', _levelStars['chinese']);
+    await _box!.put('pinyinLevelStars', _levelStars['pinyin']);
   }
 
   bool isLevelUnlocked(String subject, int level) {
@@ -134,6 +153,9 @@ class GameProvider extends ChangeNotifier {
         case 'chinese':
           _chineseStars += starDiff;
           break;
+        case 'pinyin':
+          _pinyinStars += starDiff;
+          break;
       }
 
       // 更新关卡星星
@@ -154,17 +176,20 @@ class GameProvider extends ChangeNotifier {
     _englishStars = 0;
     _mathStars = 0;
     _chineseStars = 0;
+    _pinyinStars = 0;
 
     _unlockedLevels = {
-      'english': List.generate(5, (i) => i == 0),
+      'english': List.generate(8, (i) => i == 0),
       'math': List.generate(10, (i) => i == 0),
       'chinese': List.generate(5, (i) => i == 0),
+      'pinyin': List.generate(4, (i) => i == 0),
     };
 
     _levelStars = {
-      'english': List.filled(5, 0),
+      'english': List.filled(8, 0),
       'math': List.filled(10, 0),
       'chinese': List.filled(5, 0),
+      'pinyin': List.filled(4, 0),
     };
 
     await _saveProgress();

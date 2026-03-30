@@ -64,7 +64,7 @@ class WorldMapScreen extends StatelessWidget {
   int get _totalLevels {
     switch (subject) {
       case 'english':
-        return 5;
+        return 8;
       case 'math':
         return 10;
       case 'chinese':
@@ -89,9 +89,73 @@ class WorldMapScreen extends StatelessWidget {
           child: Column(
             children: [
               _buildHeader(context),
+              if (subject == 'chinese') _buildPinyinEntry(context),
               Expanded(child: _buildLevelGrid(context)),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPinyinEntry(BuildContext context) {
+    return GestureDetector(
+      onTap: () => context.push('/pinyin'),
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              AppTheme.chineseColor.withValues(alpha: 0.2),
+              AppTheme.chineseColor.withValues(alpha: 0.1),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: AppTheme.chineseColor.withValues(alpha: 0.3),
+            width: 2,
+          ),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: AppTheme.chineseColor.withValues(alpha: 0.2),
+                shape: BoxShape.circle,
+              ),
+              child: const Text('🔤', style: TextStyle(fontSize: 28)),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '拼音花园',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: AppTheme.chineseColor,
+                    ),
+                  ),
+                  Text(
+                    '声母·韵母·声调·整体认读',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: AppTheme.textSecondary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: AppTheme.chineseColor,
+              size: 20,
+            ),
+          ],
         ),
       ),
     );

@@ -7,7 +7,6 @@ import '../../core/constants/english_data.dart';
 import '../../core/constants/math_data.dart';
 import '../../core/constants/chinese_data.dart';
 import '../providers/game_provider.dart';
-import '../widgets/option_button.dart';
 
 class QuizScreen extends StatefulWidget {
   final String subject;
@@ -37,7 +36,11 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   Future<void> _initTts() async {
-    await _flutterTts.setLanguage('en-US');
+    if (widget.subject == 'english') {
+      await _flutterTts.setLanguage('en-US');
+    } else if (widget.subject == 'chinese' || widget.subject == 'pinyin') {
+      await _flutterTts.setLanguage('zh-CN');
+    }
     await _flutterTts.setSpeechRate(0.5);
     await _flutterTts.setVolume(1.0);
   }
@@ -48,6 +51,8 @@ class _QuizScreenState extends State<QuizScreen> {
     super.dispose();
   }
 
+  bool get _isPinyin => widget.subject == 'pinyin';
+
   Color get _color {
     switch (widget.subject) {
       case 'english':
@@ -55,6 +60,7 @@ class _QuizScreenState extends State<QuizScreen> {
       case 'math':
         return AppTheme.mathColor;
       case 'chinese':
+      case 'pinyin':
         return AppTheme.chineseColor;
       default:
         return AppTheme.englishColor;
@@ -62,6 +68,9 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   int get _totalQuestions {
+    if (_isPinyin) {
+      return pinyinChapters[widget.level - 1].questions.length;
+    }
     switch (widget.subject) {
       case 'english':
         return englishChapters[widget.level - 1].words.length;
@@ -75,6 +84,9 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   String get _questionText {
+    if (_isPinyin) {
+      return pinyinChapters[widget.level - 1].questions[_currentIndex].question;
+    }
     switch (widget.subject) {
       case 'english':
         return englishChapters[widget.level - 1].words[_currentIndex].english;
@@ -88,6 +100,9 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   String get _answerText {
+    if (_isPinyin) {
+      return pinyinChapters[widget.level - 1].questions[_currentIndex].answer;
+    }
     switch (widget.subject) {
       case 'english':
         return englishChapters[widget.level - 1].words[_currentIndex].chinese;
@@ -102,6 +117,9 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   List<String> get _options {
+    if (_isPinyin) {
+      return pinyinChapters[widget.level - 1].questions[_currentIndex].options;
+    }
     switch (widget.subject) {
       case 'english':
         final words = englishChapters[widget.level - 1].words;
@@ -117,16 +135,28 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   int get _correctIndex {
+    if (_isPinyin) {
+      final options = _options;
+      final answer = _answerText;
+      return options.indexOf(answer);
+    }
     switch (widget.subject) {
       case 'english':
-        return 0; // 中文答案是第一个选项
+        return 0;
       case 'math':
         return mathLevels[widget.level - 1].problems[_currentIndex].correctIndex;
       case 'chinese':
-        return 0; // 拼音答案是第一个选项
+        return 0;
       default:
         return 0;
     }
+  }
+
+  String? get _hint {
+    if (_isPinyin) {
+      return pinyinChapters[widget.level - 1].questions[_currentIndex].hint;
+    }
+    return null;
   }
 
   void _speak() async {
@@ -135,6 +165,7 @@ class _QuizScreenState extends State<QuizScreen> {
         await _flutterTts.speak(_questionText);
         break;
       case 'chinese':
+      case 'pinyin':
         await _flutterTts.setLanguage('zh-CN');
         await _flutterTts.speak(_questionText);
         break;
@@ -271,7 +302,7 @@ class _QuizScreenState extends State<QuizScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        if (widget.subject == 'english' || widget.subject == 'chinese')
+        if (widget.subject == 'english' || widget.subject == 'chinese' || _isPinyin)
           GestureDetector(
             onTap: _speak,
             child: Container(
@@ -292,7 +323,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   Text(
                     _questionText,
                     style: TextStyle(
-                      fontSize: widget.subject == 'chinese' ? 64 : 48,
+                      fontSize: _isPinyin ? 48 : 64,
                       fontWeight: FontWeight.bold,
                       color: _color,
                     ),
@@ -326,6 +357,22 @@ class _QuizScreenState extends State<QuizScreen> {
                 color: _color,
               ),
               textAlign: TextAlign.center,
+            ),
+          ),
+        const SizedBox(height: 16),
+        if (_hint != null && !_showFeedback)
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: _color.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              _hint!,
+              style: TextStyle(
+                color: _color,
+                fontSize: 14,
+              ),
             ),
           ),
         const SizedBox(height: 20),

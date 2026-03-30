@@ -8,6 +8,7 @@ import '../../presentation/screens/result_screen.dart';
 import '../../presentation/screens/house_screen.dart';
 import '../../presentation/screens/stars_screen.dart';
 import '../../presentation/screens/settings_screen.dart';
+import '../../presentation/screens/pinyin_garden_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -44,6 +45,20 @@ final appRouter = GoRouter(
         final subject = state.pathParameters['subject']!;
         final level = int.parse(state.pathParameters['level']!);
         return QuizScreen(subject: subject, level: level);
+      },
+    ),
+    // 拼音花园路由
+    GoRoute(
+      path: '/pinyin',
+      name: 'pinyin',
+      builder: (context, state) => const PinyinGardenScreen(),
+    ),
+    GoRoute(
+      path: '/quiz/pinyin/:level',
+      name: 'pinyinQuiz',
+      builder: (context, state) {
+        final level = int.parse(state.pathParameters['level']!);
+        return QuizScreen(subject: 'pinyin', level: level);
       },
     ),
     GoRoute(
