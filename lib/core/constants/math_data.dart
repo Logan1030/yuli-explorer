@@ -133,4 +133,70 @@ const mathLevels = [
       MathProblem(question: '9 + 9 = ?', options: ['16', '17', '18', '19'], correctIndex: 2),
     ],
   ),
+  MathLevel(
+    level: 11,
+    title: '第十一关：20以内进位加法',
+    problems: [
+      MathProblem(question: '8 + 7 = ?', options: ['13', '14', '15', '16'], correctIndex: 2),
+      MathProblem(question: '9 + 8 = ?', options: ['15', '16', '17', '18'], correctIndex: 2),
+      MathProblem(question: '7 + 9 = ?', options: ['14', '15', '16', '17'], correctIndex: 2),
+      MathProblem(question: '9 + 6 = ?', options: ['13', '14', '15', '16'], correctIndex: 2),
+      MathProblem(question: '8 + 8 = ?', options: ['14', '15', '16', '17'], correctIndex: 2),
+    ],
+  ),
+  MathLevel(
+    level: 12,
+    title: '第十二关：20以内退位减法',
+    problems: [
+      MathProblem(question: '13 - 8 = ?', options: ['4', '5', '6', '7'], correctIndex: 1),
+      MathProblem(question: '15 - 9 = ?', options: ['5', '6', '7', '8'], correctIndex: 1),
+      MathProblem(question: '12 - 7 = ?', options: ['4', '5', '6', '7'], correctIndex: 1),
+      MathProblem(question: '14 - 8 = ?', options: ['5', '6', '7', '8'], correctIndex: 1),
+      MathProblem(question: '16 - 9 = ?', options: ['6', '7', '8', '9'], correctIndex: 1),
+    ],
+  ),
+  MathLevel(
+    level: 13,
+    title: '第十三关：50以内加减',
+    problems: [
+      MathProblem(question: '25 + 18 = ?', options: ['41', '42', '43', '44'], correctIndex: 2),
+      MathProblem(question: '47 - 19 = ?', options: ['26', '27', '28', '29'], correctIndex: 2),
+      MathProblem(question: '36 + 14 = ?', options: ['48', '49', '50', '51'], correctIndex: 2),
+      MathProblem(question: '43 - 17 = ?', options: ['24', '25', '26', '27'], correctIndex: 2),
+      MathProblem(question: '28 + 17 = ?', options: ['43', '44', '45', '46'], correctIndex: 2),
+    ],
+  ),
+  MathLevel(
+    level: 14,
+    title: '第十四关：100以内加减',
+    problems: [
+      MathProblem(question: '56 + 37 = ?', options: ['91', '92', '93', '94'], correctIndex: 2),
+      MathProblem(question: '84 - 29 = ?', options: ['53', '54', '55', '56'], correctIndex: 2),
+      MathProblem(question: '45 + 38 = ?', options: ['81', '82', '83', '84'], correctIndex: 2),
+      MathProblem(question: '91 - 46 = ?', options: ['43', '44', '45', '46'], correctIndex: 2),
+      MathProblem(question: '67 + 28 = ?', options: ['93', '94', '95', '96'], correctIndex: 2),
+    ],
+  ),
+  MathLevel(
+    level: 15,
+    title: '第十五关：加减混合',
+    problems: [
+      MathProblem(question: '15 + 8 - 7 = ?', options: ['14', '15', '16', '17'], correctIndex: 2),
+      MathProblem(question: '20 - 6 + 9 = ?', options: ['21', '22', '23', '24'], correctIndex: 2),
+      MathProblem(question: '12 + 9 - 8 = ?', options: ['11', '12', '13', '14'], correctIndex: 2),
+      MathProblem(question: '25 - 7 + 15 = ?', options: ['31', '32', '33', '34'], correctIndex: 2),
+      MathProblem(question: '18 + 14 - 9 = ?', options: ['21', '22', '23', '24'], correctIndex: 2),
+    ],
+  ),
+  MathLevel(
+    level: 16,
+    title: '第十六关：终极挑战',
+    problems: [
+      MathProblem(question: '38 + 47 = ?', options: ['83', '84', '85', '86'], correctIndex: 2),
+      MathProblem(question: '91 - 58 = ?', options: ['31', '32', '33', '34'], correctIndex: 2),
+      MathProblem(question: '56 + 29 - 38 = ?', options: ['45', '46', '47', '48'], correctIndex: 2),
+      MathProblem(question: '72 - 35 + 19 = ?', options: ['54', '55', '56', '57'], correctIndex: 2),
+      MathProblem(question: '45 + 37 = ?', options: ['80', '81', '82', '83'], correctIndex: 2),
+    ],
+  ),
 ];

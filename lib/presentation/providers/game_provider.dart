@@ -24,7 +24,7 @@ class GameProvider extends ChangeNotifier {
   // 各科目解锁状态
   Map<String, List<bool>> _unlockedLevels = {
     'english': List.generate(8, (i) => i == 0),  // 第一章解锁
-    'math': List.generate(10, (i) => i == 0),    // 第一关解锁
+    'math': List.generate(16, (i) => i == 0),    // 第一关解锁
     'chinese': List.generate(5, (i) => i == 0),  // 第一章解锁
     'pinyin': List.generate(4, (i) => i == 0),   // 第一章解锁
   };
@@ -34,7 +34,7 @@ class GameProvider extends ChangeNotifier {
   // 各科目每关获得的星星
   Map<String, List<int>> _levelStars = {
     'english': List.filled(8, 0),
-    'math': List.filled(10, 0),
+    'math': List.filled(16, 0),
     'chinese': List.filled(5, 0),
     'pinyin': List.filled(4, 0),
   };
@@ -180,14 +180,14 @@ class GameProvider extends ChangeNotifier {
 
     _unlockedLevels = {
       'english': List.generate(8, (i) => i == 0),
-      'math': List.generate(10, (i) => i == 0),
+      'math': List.generate(16, (i) => i == 0),
       'chinese': List.generate(5, (i) => i == 0),
       'pinyin': List.generate(4, (i) => i == 0),
     };
 
     _levelStars = {
       'english': List.filled(8, 0),
-      'math': List.filled(10, 0),
+      'math': List.filled(16, 0),
       'chinese': List.filled(5, 0),
       'pinyin': List.filled(4, 0),
     };
